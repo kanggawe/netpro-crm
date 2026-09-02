@@ -1,0 +1,276 @@
+<?php
+/**
+ * Dynamic Modular Sidebar Menu Component with Font Awesome 6 Icons
+ */
+$currentUri = $_SERVER['PHP_SELF'];
+
+$menus = [
+    [
+        'id' => 'm-dashboard',
+        'title' => 'DASHBOARD',
+        'icon' => 'fa-chart-pie',
+        'color' => 'text-blue-400',
+        'items' => [
+            ['title' => 'Ringkasan Bisnis', 'url' => 'dashboard/utama.php', 'icon' => 'fa-gauge-high'],
+            ['title' => 'Pendapatan Bulan Berjalan', 'url' => 'dashboard/revenue.php', 'icon' => 'fa-arrow-trend-up'],
+            ['title' => 'Tagihan Jatuh Tempo', 'url' => 'dashboard/overdue.php', 'icon' => 'fa-clock-rotate-left'],
+            ['title' => 'Pelanggan Aktif/Suspend', 'url' => 'dashboard/customers.php', 'icon' => 'fa-users-line'],
+            ['title' => 'Tiket Gangguan', 'url' => 'dashboard/tickets.php', 'icon' => 'fa-triangle-exclamation'],
+            ['title' => 'Status Jaringan', 'url' => 'dashboard/noc.php', 'icon' => 'fa-network-wired'],
+            ['title' => 'Statistik Karyawan', 'url' => 'dashboard/hr.php', 'icon' => 'fa-user-check']
+        ]
+    ],
+    [
+        'id' => 'm-crm',
+        'title' => 'CRM & PELANGGAN',
+        'icon' => 'fa-users',
+        'color' => 'text-indigo-400',
+        'items' => [
+            ['title' => 'Daftar Pelanggan', 'url' => 'crm/daftar.php', 'icon' => 'fa-address-book'],
+            ['title' => 'Registrasi Akun Baru', 'url' => 'crm/registrasi.php', 'icon' => 'fa-user-plus'],
+            ['title' => 'Detail Profil Pelanggan', 'url' => 'crm/detail.php', 'icon' => 'fa-id-card'],
+            ['title' => 'Riwayat Berlangganan', 'url' => 'crm/riwayat.php', 'icon' => 'fa-history'],
+            ['title' => 'Katalog Paket Internet', 'url' => 'crm/paket.php', 'icon' => 'fa-box-open'],
+            ['title' => 'Add-on Layanan', 'url' => 'crm/addon.php', 'icon' => 'fa-puzzle-piece'],
+            ['title' => 'Promo & Diskon', 'url' => 'crm/promo.php', 'icon' => 'fa-tags'],
+            ['title' => 'Jadwal Survey lokasi', 'url' => 'crm/survey.php', 'icon' => 'fa-map-location-dot'],
+            ['title' => 'Pemasangan Baru (WO)', 'url' => 'crm/instalasi.php', 'icon' => 'fa-tools'],
+            ['title' => 'Berita Acara (BAST)', 'url' => 'crm/berita_acara.php', 'icon' => 'fa-file-signature']
+        ]
+    ],
+    [
+        'id' => 'm-billing',
+        'title' => 'BILLING & TAGIHAN',
+        'icon' => 'fa-credit-card',
+        'color' => 'text-emerald-400',
+        'items' => [
+            ['title' => 'Generate Tagihan Massal', 'url' => 'billing/generate.php', 'icon' => 'fa-file-invoice-dollar'],
+            ['title' => 'Daftar Tagihan Pelanggan', 'url' => 'billing/daftar.php', 'icon' => 'fa-list-check'],
+            ['title' => 'Input Pembayaran Kasir', 'url' => 'billing/pembayaran.php', 'icon' => 'fa-money-bill-wave'],
+            ['title' => 'Riwayat Transaksi', 'url' => 'billing/riwayat.php', 'icon' => 'fa-receipt'],
+            ['title' => 'Cetak Invoice PDF', 'url' => 'billing/invoice.php', 'icon' => 'fa-print'],
+            ['title' => 'Pengaturan Denda', 'url' => 'billing/denda.php', 'icon' => 'fa-triangle-exclamation']
+        ]
+    ],
+    [
+        'id' => 'm-radius',
+        'title' => 'RADIUS SERVER',
+        'icon' => 'fa-network-wired',
+        'color' => 'text-cyan-400',
+        'items' => [
+            ['title' => 'Router NAS Mikrotik', 'url' => 'radius/nas.php', 'icon' => 'fa-server'],
+            ['title' => 'Pengguna PPPoE & Hotspot', 'url' => 'radius/users.php', 'icon' => 'fa-users-gear'],
+            ['title' => 'Sesi Aktif Real-time', 'url' => 'radius/sessions.php', 'icon' => 'fa-bolt'],
+            ['title' => 'Profil Kecepatan (Bandwidth)', 'url' => 'radius/profiles.php', 'icon' => 'fa-gauge-simple-high'],
+            ['title' => 'Manajemen Voucher Hotspot', 'url' => 'radius/vouchers.php', 'icon' => 'fa-ticket'],
+            ['title' => 'Laporan Penggunaan Data', 'url' => 'radius/reports.php', 'icon' => 'fa-chart-area']
+        ]
+    ],
+    [
+        'id' => 'm-noc',
+        'title' => 'NOC (NETWORK OPS)',
+        'icon' => 'fa-microchip',
+        'color' => 'text-amber-400',
+        'items' => [
+            ['title' => 'Status Jaringan & POP', 'url' => 'noc/monitoring.php', 'icon' => 'fa-heart-pulse'],
+            ['title' => 'Manajemen Mikrotik API', 'url' => 'noc/mikrotik.php', 'icon' => 'fa-sliders'],
+            ['title' => 'Insiden & Outage Fiber', 'url' => 'noc/outage.php', 'icon' => 'fa-scissors']
+        ]
+    ],
+    [
+        'id' => 'm-tickets',
+        'title' => 'TICKETING & CSAT',
+        'icon' => 'fa-headset',
+        'color' => 'text-rose-400',
+        'items' => [
+            ['title' => 'Daftar Tiket Gangguan', 'url' => 'tickets/list.php', 'icon' => 'fa-ticket-simple'],
+            ['title' => 'Komplain & Survey CSAT', 'url' => 'tickets/complaints.php', 'icon' => 'fa-comments']
+        ]
+    ],
+    [
+        'id' => 'm-hr',
+        'title' => 'HR & KARYAWAN',
+        'icon' => 'fa-user-tie',
+        'color' => 'text-violet-400',
+        'items' => [
+            ['title' => 'Data Karyawan', 'url' => 'hr/karyawan.php', 'icon' => 'fa-id-badge'],
+            ['title' => 'Absensi & Presensi GPS', 'url' => 'hr/absensi.php', 'icon' => 'fa-calendar-check'],
+            ['title' => 'Pengajuan Cuti & Izin', 'url' => 'hr/cuti.php', 'icon' => 'fa-plane-departure']
+        ]
+    ],
+    [
+        'id' => 'm-kinerja',
+        'title' => 'PENILAIAN KINERJA',
+        'icon' => 'fa-award',
+        'color' => 'text-yellow-400',
+        'items' => [
+            ['title' => 'Master KPI Divisi', 'url' => 'kinerja/kpi.php', 'icon' => 'fa-list-ol'],
+            ['title' => 'Target Kerja Tim', 'url' => 'kinerja/target.php', 'icon' => 'fa-bullseye'],
+            ['title' => 'Review Evaluasi 360', 'url' => 'kinerja/review.php', 'icon' => 'fa-user-pen'],
+            ['title' => 'Grafik & Leaderboard', 'url' => 'kinerja/laporan.php', 'icon' => 'fa-trophy']
+        ]
+    ],
+    [
+        'id' => 'm-payroll',
+        'title' => 'PAYROLL (PENGGAJIAN)',
+        'icon' => 'fa-money-bill-wave',
+        'color' => 'text-emerald-400',
+        'items' => [
+            ['title' => 'Master Komponen Gaji', 'url' => 'payroll/master.php', 'icon' => 'fa-coins'],
+            ['title' => 'Generate & Slip Gaji', 'url' => 'payroll/generate.php', 'icon' => 'fa-file-invoice'],
+            ['title' => 'Insentif & Bonus Pasang', 'url' => 'payroll/bonus.php', 'icon' => 'fa-hand-holding-dollar'],
+            ['title' => 'Rekapitulasi Gaji & BPJS', 'url' => 'payroll/laporan.php', 'icon' => 'fa-scale-balanced']
+        ]
+    ],
+    [
+        'id' => 'm-inventory',
+        'title' => 'INVENTORY & ASSETS',
+        'icon' => 'fa-boxes-stacked',
+        'color' => 'text-orange-400',
+        'items' => [
+            ['title' => 'Data & Stok Barang', 'url' => 'inventory/barang.php', 'icon' => 'fa-box'],
+            ['title' => 'Keluar & Masuk Barang', 'url' => 'inventory/stok.php', 'icon' => 'fa-right-left'],
+            ['title' => 'Aset & Tools Kerja', 'url' => 'inventory/asset.php', 'icon' => 'fa-screwdriver-wrench'],
+            ['title' => 'Supplier & PO History', 'url' => 'inventory/supplier.php', 'icon' => 'fa-truck-field']
+        ]
+    ],
+    [
+        'id' => 'm-finance',
+        'title' => 'KEUANGAN & AKUNTANSI',
+        'icon' => 'fa-wallet',
+        'color' => 'text-teal-400',
+        'items' => [
+            ['title' => 'Arus Kas & Bank', 'url' => 'finance/kas.php', 'icon' => 'fa-money-bill-transfer'],
+            ['title' => 'Pengeluaran OPEX', 'url' => 'finance/pengeluaran.php', 'icon' => 'fa-receipt'],
+            ['title' => 'Buku Besar & COA', 'url' => 'finance/akuntansi.php', 'icon' => 'fa-book-bookmark'],
+            ['title' => 'Neraca & Laba Rugi', 'url' => 'finance/laporan.php', 'icon' => 'fa-scale-balanced'],
+            ['title' => 'Pajak & Regulasi ISP', 'url' => 'finance/pajak.php', 'icon' => 'fa-file-invoice-dollar']
+        ]
+    ],
+    [
+        'id' => 'm-marketing',
+        'title' => 'MARKETING & SALES',
+        'icon' => 'fa-bullhorn',
+        'color' => 'text-pink-400',
+        'items' => [
+            ['title' => 'Prospek & Leads Sales', 'url' => 'marketing/leads.php', 'icon' => 'fa-filter-circle-dollar'],
+            ['title' => 'Broadcast Promo WA', 'url' => 'marketing/campaign.php', 'icon' => 'fa-paper-plane'],
+            ['title' => 'Target & Komisi Sales', 'url' => 'marketing/sales.php', 'icon' => 'fa-chart-pie']
+        ]
+    ],
+    [
+        'id' => 'm-laporan',
+        'title' => 'LAPORAN TERPADU',
+        'icon' => 'fa-file-lines',
+        'color' => 'text-sky-400',
+        'items' => [
+            ['title' => 'Laporan Summary ISP', 'url' => 'laporan/summary.php', 'icon' => 'fa-file-export']
+        ]
+    ],
+    [
+        'id' => 'm-kalkulator',
+        'title' => 'KALKULATOR ISP',
+        'icon' => 'fa-calculator',
+        'color' => 'text-amber-400',
+        'items' => [
+            ['title' => 'Kalkulator Bandwidth & CIR', 'url' => 'kalkulator/bandwidth.php', 'icon' => 'fa-gauge-high'],
+            ['title' => 'Kalkulator Pajak & PPN', 'url' => 'kalkulator/pajak.php', 'icon' => 'fa-percent']
+        ]
+    ],
+    [
+        'id' => 'm-pengaturan',
+        'title' => 'PENGATURAN SISTEM',
+        'icon' => 'fa-gear',
+        'color' => 'text-slate-400',
+        'items' => [
+            ['title' => 'Konfigurasi Sistem & Server', 'url' => 'pengaturan/sistem.php', 'icon' => 'fa-gears'],
+            ['title' => 'Identitas & Cabang ISP', 'url' => 'pengaturan/perusahaan.php', 'icon' => 'fa-building'],
+            ['title' => 'Otomatisasi Billing & Denda', 'url' => 'pengaturan/billing_config.php', 'icon' => 'fa-calendar-check'],
+            ['title' => 'Payment Gateways & QRIS', 'url' => 'pengaturan/payment_gateway.php', 'icon' => 'fa-credit-card'],
+            ['title' => 'WhatsApp & Server Notifikasi', 'url' => 'pengaturan/wa_gateway.php', 'icon' => 'fa-comments'],
+            ['title' => 'Integrasi Mikrotik & Radius', 'url' => 'pengaturan/api.php', 'icon' => 'fa-code-branch'],
+            ['title' => 'Backup & Database Restore', 'url' => 'pengaturan/backup.php', 'icon' => 'fa-database'],
+            ['title' => 'User Admin & Roles', 'url' => 'pengaturan/users.php', 'icon' => 'fa-user-lock'],
+            ['title' => 'Audit Logs System', 'url' => 'pengaturan/logs.php', 'icon' => 'fa-clock-rotate-left'],
+            ['title' => 'Lisensi & Aktivasi Sistem', 'url' => 'pengaturan/lisensi.php', 'icon' => 'fa-certificate'],
+            ['title' => 'Tentang Aplikasi', 'url' => 'pengaturan/about.php', 'icon' => 'fa-circle-info']
+        ]
+    ]
+];
+?>
+<aside id="sidebar" class="w-64 bg-slate-900 border-r border-slate-800/80 flex flex-col h-full z-40 transition-all duration-300 shrink-0 md:relative absolute -translate-x-full md:translate-x-0">
+    <!-- Brand Header -->
+    <div class="h-16 flex items-center justify-between px-5 border-b border-slate-800/80 bg-slate-950">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/25">
+                <i class="fa-solid fa-tower-cell text-sm"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-slate-50 text-xs tracking-wider uppercase"><?= APP_NAME ?></h1>
+                <span class="text-[9px] text-blue-400 font-bold tracking-widest block uppercase"><?= APP_DESC ?></span>
+            </div>
+        </div>
+        <button onclick="toggleMobileSidebar()" class="md:hidden text-slate-400 hover:text-white text-lg">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- Search Box -->
+    <div class="p-3 border-b border-slate-800/80 bg-slate-950/60">
+        <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs"></i>
+            <input type="text" id="sidebarSearch" onkeyup="filterSidebarMenu()" placeholder="Cari menu / fitur..." class="w-full bg-slate-900 border border-slate-800 rounded-lg py-1.5 pl-8 pr-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition">
+        </div>
+    </div>
+
+    <!-- Menu List -->
+    <div class="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
+        <?php foreach ($menus as $grp): 
+            $isOpen = ($activeMenu === $grp['id']);
+            $rotate = $isOpen ? 'style="transform: rotate(180deg);"' : '';
+            $openClass = $isOpen ? 'open' : '';
+        ?>
+        <div class="menu-group">
+            <button onclick="toggleSidebarMenu('<?= $grp['id'] ?>')" class="w-full flex justify-between items-center px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-xl text-xs font-semibold tracking-wide transition group">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid <?= $grp['icon'] ?> <?= $grp['color'] ?> group-hover:scale-110 transition-transform"></i>
+                    <span><?= $grp['title'] ?></span>
+                </div>
+                <i id="arrow-<?= $grp['id'] ?>" class="fa-solid fa-chevron-down text-[9px] text-slate-500 transition-transform duration-200" <?= $rotate ?>></i>
+            </button>
+            <div id="<?= $grp['id'] ?>" class="submenu-container <?= $openClass ?> mt-1 pl-4 space-y-1 border-l border-slate-800 ml-4">
+                <?php foreach ($grp['items'] as $item): 
+                    $targetUrl = base_url($item['url']);
+                    $isActive = strpos($currentUri, $item['url']) !== false;
+                    $itemClass = $isActive 
+                        ? 'border-l-2 border-blue-500 bg-blue-600/15 text-blue-400 font-semibold shadow-inner' 
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50';
+                ?>
+                <a href="<?= $targetUrl ?>" class="submenu-item flex items-center py-1.5 px-3 text-xs rounded-r-lg transition duration-150 <?= $itemClass ?>">
+                    <i class="fa-solid <?= $item['icon'] ?> text-[10px] w-4 opacity-75"></i>
+                    <span><?= $item['title'] ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="p-3 border-t border-slate-800/80 bg-slate-950 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <div class="overflow-hidden">
+                <p class="text-xs font-bold text-slate-200 truncate">Admin NOC Core</p>
+                <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Super Admin
+                </span>
+            </div>
+        </div>
+        <button onclick="logOutSim()" class="text-slate-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-slate-900 transition" title="Log Out">
+            <i class="fa-solid fa-right-from-bracket text-xs"></i>
+        </button>
+    </div>
+</aside>

@@ -1,0 +1,705 @@
+/* NETPRO CRM - Custom Styles & Scrollbars */
+body {
+    font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom sleek scrollbar for sidebar, tables, and viewport */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(220, 38, 38, 0.25);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(220, 38, 38, 0.65);
+}
+
+.custom-scrollbar,
+.scrollbar-thin,
+#sidebarMenuScroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(220, 38, 38, 0.3) transparent;
+    scroll-behavior: smooth;
+}
+
+/* Accordion transition */
+.submenu-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submenu-container.open {
+    max-height: 1000px;
+}
+
+/* Leaflet map container custom style */
+.leaflet-container {
+    font-family: 'Inter', sans-serif;
+    border-radius: 0.75rem;
+    z-index: 10;
+}
+
+/* ==========================================================
+   FIX: TAILWIND SPACE-Y MARGIN LEAKAGE ON FIXED MODALS & BACKDROPS
+   ========================================================== */
+.space-y-6 > .fixed,
+.space-y-4 > .fixed,
+.space-y-3 > .fixed,
+.fixed,
+[class*="fixed"],
+[id^="modal"],
+[id*="modal"],
+[id*="Modal"] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* ==========================================================
+   UNIVERSAL MODERN SAAS MODAL SYSTEM & BACKDROP BLUR
+   ========================================================== */
+.fixed.inset-0,
+[id^="modal"].fixed,
+[id*="modal"].fixed,
+[id*="Modal"].fixed {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(2, 6, 23, 0.70) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    z-index: 9999 !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Modal Inner Card Pop-in Animation & Modern Radius */
+[id^="modal"] > div,
+[id*="modal"] > div,
+[id*="Modal"] > div {
+    border-radius: 1.5rem !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid #f1f5f9 !important;
+    overflow: hidden !important;
+    animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modern Input and Select fields inside Modals */
+[id^="modal"] form input[type="text"],
+[id^="modal"] form input[type="number"],
+[id^="modal"] form input[type="email"],
+[id^="modal"] form input[type="password"],
+[id^="modal"] form select,
+[id^="modal"] form textarea,
+[id*="modal"] form input[type="text"],
+[id*="modal"] form input[type="number"],
+[id*="modal"] form input[type="email"],
+[id*="modal"] form input[type="password"],
+[id*="modal"] form select,
+[id*="modal"] form textarea {
+    border-radius: 0.75rem !important;
+    padding: 0.65rem 0.85rem !important;
+    border: 1px solid #e2e8f0 !important;
+    background-color: #f8fafc !important;
+    transition: all 0.2s ease-in-out !important;
+    font-size: 0.75rem !important;
+}
+
+[id^="modal"] form input:focus,
+[id^="modal"] form select:focus,
+[id^="modal"] form textarea:focus,
+[id*="modal"] form input:focus,
+[id*="modal"] form select:focus,
+[id*="modal"] form textarea:focus {
+    background-color: #ffffff !important;
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15) !important;
+    outline: none !important;
+}
+
+/* Modal Headers: Smooth Light Gradient Transition */
+[id^="modal"] > div > div.bg-slate-950,
+[id*="modal"] > div > div.bg-slate-950 {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%) !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+[id^="modal"] > div > div.bg-slate-950 h3,
+[id*="modal"] > div > div.bg-slate-950 h3 {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+[id^="modal"] > div > div.bg-slate-950 button,
+[id*="modal"] > div > div.bg-slate-950 button {
+    color: #94a3b8 !important;
+    border-radius: 9999px !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s !important;
+    font-size: 1rem !important;
+}
+
+[id^="modal"] > div > div.bg-slate-950 button:hover,
+[id*="modal"] > div > div.bg-slate-950 button:hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9 !important;
+}
+
+/* ==========================================================
+   OFFICIAL ENTERPRISE PRINT STYLESHEET (@media print)
+   ========================================================== */
+@page {
+    size: A4 portrait;
+    margin: 12mm 15mm 12mm 15mm;
+}
+
+@media print {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box !important;
+    }
+
+    /* 1. Sembunyikan Seluruh Elemen Non-Cetak (Sidebar, Header, Navbar, Tombol, Modal) */
+    aside,
+    #sidebar,
+    header,
+    nav,
+    button,
+    .btn,
+    .no-print,
+    .view-action-buttons,
+    [id^="modal"],
+    [id*="modal"],
+    [id*="Modal"],
+    .modal,
+    [role="dialog"],
+    div.fixed,
+    div.absolute.-translate-x-full,
+    [class*="backdrop-blur"],
+    [class*="bg-slate-900/60"],
+    #toastBox,
+    #quickRegModal,
+    input[type="text"],
+    input[type="search"],
+    .leaflet-control-container,
+    .custom-scrollbar::-webkit-scrollbar {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        position: absolute !important;
+        overflow: hidden !important;
+    }
+
+    /* Sembunyikan kolom aksi pada tabel saat dicetak */
+    th.text-right:last-child,
+    td.text-right:last-child:has(button),
+    td.text-right:last-child:has(form),
+    td.text-right:last-child:has(a) {
+        display: none !important;
+    }
+
+    /* 2. Reset Layout Container Total (Eliminasi Blank Page 1 & Full Width) */
+    html,
+    body {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        width: 100% !important;
+        position: static !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 9.5pt !important;
+        line-height: 1.4 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    div,
+    main,
+    section,
+    article,
+    #content-viewport,
+    .view-panel {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: static !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    .h-screen,
+    .w-screen,
+    .h-full,
+    .w-full,
+    .flex-1,
+    .overflow-hidden,
+    .overflow-y-auto {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        width: 100% !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    /* 3. Tampilkan KOP Surat Resmi Perusahaan di Paling Atas */
+    .global-print-header,
+    .print-only {
+        display: block !important;
+        visibility: visible !important;
+        margin-top: 0 !important;
+        margin-bottom: 14pt !important;
+        padding-bottom: 8pt !important;
+        border-bottom: 2.5px solid #0f172a !important;
+        page-break-before: avoid !important;
+        page-break-after: avoid !important;
+    }
+
+    /* 4. Formatting Grid Kartu Ringkasan & Metrik (Proposional Memenuhi Lebar Kertas) */
+    .grid {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 12pt !important;
+        margin-bottom: 14pt !important;
+        page-break-inside: avoid !important;
+    }
+
+    .grid > div {
+        flex: 1 1 0% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-shadow: none !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        padding: 10pt 14pt !important;
+        background: #ffffff !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Sembunyikan ikon grafis dekoratif di kartu agar metrik lapang dan bersih */
+    .w-10,
+    .w-11,
+    .w-12,
+    .w-14,
+    .h-10,
+    .h-11,
+    .h-12,
+    .h-14,
+    .rounded-2xl.flex.items-center.justify-center,
+    .rounded-xl.flex.items-center.justify-center {
+        display: none !important;
+    }
+
+    .bg-white,
+    .p-4,
+    .p-5,
+    .p-6,
+    .rounded-2xl,
+    .rounded-xl {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        margin-bottom: 12pt !important;
+        page-break-inside: avoid !important;
+        background: #ffffff !important;
+    }
+
+    strong.text-2xl {
+        font-size: 15pt !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        display: block !important;
+        margin: 3pt 0 !important;
+    }
+
+    /* 5. Formatting Tabel Dokumen Cetak */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 9pt !important;
+        margin-top: 8pt !important;
+        page-break-inside: auto !important;
+    }
+
+    thead {
+        display: table-header-group !important;
+        background-color: #f1f5f9 !important;
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
+    }
+
+    th,
+    td {
+        border: 1px solid #cbd5e1 !important;
+        padding: 6pt 9pt !important;
+        color: #0f172a !important;
+        text-align: left !important;
+    }
+
+    th {
+        font-weight: 700 !important;
+        background-color: #f1f5f9 !important;
+        text-transform: uppercase !important;
+        font-size: 8pt !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* 6. Footer Tanda Tangan & Otorisasi Cetak */
+    .global-print-footer,
+    .print-sign-off {
+        display: block !important;
+        visibility: visible !important;
+        margin-top: 24pt !important;
+        padding-top: 14pt !important;
+        border-top: 1.5px solid #94a3b8 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .global-print-footer .grid,
+    .global-print-footer .grid > div {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    /* Peta Leaflet saat dicetak */
+    .leaflet-container,
+    #hr-leaflet-map,
+    #noc-leaflet-map {
+        height: 220px !important;
+        max-height: 220px !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* 7. ATURAN KHUSUS CETAK INVOICE & BAST */
+    .invoice-paper {
+        max-width: 100% !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: #ffffff !important;
+        page-break-inside: avoid !important;
+    }
+
+    #content-viewport:has(.invoice-paper) .global-print-header {
+        display: none !important;
+    }
+}
+
+/* ==========================================================
+   GLOBAL REDDASH DESIGN SYSTEM (Universal Across All Modules)
+   ========================================================== */
+
+/* Universal Focus States for Form Inputs & Selects */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3.5px rgba(220, 38, 38, 0.14) !important;
+    outline: none !important;
+}
+
+/* RedDash Interactive Primary Buttons */
+.bg-brand-600,
+button.btn-primary,
+a.btn-primary {
+    background-color: #dc2626;
+    box-shadow: 0 4px 14px -2px rgba(220, 38, 38, 0.28);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bg-brand-600:hover,
+button.btn-primary:hover,
+a.btn-primary:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 6px 20px -3px rgba(220, 38, 38, 0.40);
+    transform: translateY(-1px);
+}
+
+/* Global Table Row Hover Accent */
+table tbody tr {
+    transition: background-color 0.15s ease-in-out;
+}
+
+table tbody tr:hover {
+    background-color: rgba(254, 242, 242, 0.5) !important;
+}
+
+/* Universal Soft Card Hover Elevation */
+.card-hover-lift {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================
+   ARROW / CHEVRON BREADCRUMB & STEPPER COMPONENT
+   ========================================================== */
+.arrow-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-width: max-content;
+    padding: 3px 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+}
+
+.arrow-breadcrumb-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.55rem;
+    padding: 0.5rem 1.25rem 0.5rem 1.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: polygon(0% 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 0% 100%);
+    margin-left: -12px;
+    z-index: 1;
+}
+
+.arrow-breadcrumb-item:first-child {
+    clip-path: polygon(0% 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 0% 100%);
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    padding-left: 1.1rem;
+    margin-left: 0;
+    z-index: 10;
+}
+
+.arrow-breadcrumb-item:nth-child(2) { z-index: 9; }
+.arrow-breadcrumb-item:nth-child(3) { z-index: 8; }
+.arrow-breadcrumb-item:nth-child(4) { z-index: 7; }
+.arrow-breadcrumb-item:nth-child(5) { z-index: 6; }
+.arrow-breadcrumb-item:nth-child(6) { z-index: 5; }
+
+.arrow-breadcrumb-item:hover {
+    z-index: 20;
+}
+
+/* When only a single item exists */
+.arrow-breadcrumb-item:only-child {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    border-radius: 0.75rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    margin-left: 0;
+}
+
+/* State 1: Completed / Ancestor Page (Vibrant RedDash / Crimson Gradient) */
+.arrow-breadcrumb-item.is-completed,
+.arrow-breadcrumb-item.is-past {
+    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+    color: #ffffff;
+}
+.arrow-breadcrumb-item.is-completed:hover,
+.arrow-breadcrumb-item.is-past:hover {
+    background: linear-gradient(135deg, #991b1b 0%, #b91c1c 100%);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* State 2: Active / Current Page */
+.arrow-breadcrumb-item.is-active {
+    background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* State 3: Inactive / Pending Steps */
+.arrow-breadcrumb-item.is-inactive,
+.arrow-breadcrumb-item.is-future {
+    background: #e2e8f0;
+    color: #64748b;
+}
+
+/* Icon / Check Bubble inside Arrow */
+.arrow-breadcrumb-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.arrow-breadcrumb-item.is-completed .arrow-breadcrumb-badge,
+.arrow-breadcrumb-item.is-past .arrow-breadcrumb-badge {
+    background: #10b981;
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(16, 185, 129, 0.4);
+}
+
+.arrow-breadcrumb-item.is-active .arrow-breadcrumb-badge {
+    background: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
+}
+
+.arrow-breadcrumb-item.is-inactive .arrow-breadcrumb-badge,
+.arrow-breadcrumb-item.is-future .arrow-breadcrumb-badge {
+    background: #cbd5e1;
+    color: #64748b;
+}
+
+/* Purple / Indigo Variant (Matching User Stepper Theme) */
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-completed {
+    background: #818cf8;
+    color: #ffffff;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-completed:hover {
+    background: #6366f1;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-completed .arrow-breadcrumb-badge {
+    background: #34d399;
+    color: #ffffff;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-active {
+    background: #6366f1;
+    color: #ffffff;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-active .arrow-breadcrumb-badge {
+    background: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-inactive {
+    background: #c7d2fe;
+    color: #4338ca;
+}
+.arrow-breadcrumb.theme-purple .arrow-breadcrumb-item.is-inactive .arrow-breadcrumb-badge {
+    background: rgba(255, 255, 255, 0.5);
+    color: #4338ca;
+}
+
+/* ==========================================================
+   MOBILE RESPONSIVE BREADCRUMB OPTIMIZATION
+   ========================================================== */
+.arrow-breadcrumb-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 0 4px 0;
+    display: flex;
+    align-items: center;
+}
+.arrow-breadcrumb-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .arrow-breadcrumb {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        min-width: max-content;
+        padding: 2px 0;
+    }
+    
+    .arrow-breadcrumb-item {
+        flex-shrink: 0 !important;
+        gap: 0.35rem;
+        padding: 0.38rem 0.8rem 0.38rem 1.1rem;
+        font-size: 0.68rem;
+        clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
+        margin-left: -10px;
+    }
+    
+    .arrow-breadcrumb-item:first-child {
+        clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        padding-left: 0.75rem;
+        margin-left: 0;
+    }
+    
+    .arrow-breadcrumb-item:only-child {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        border-radius: 0.5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin-left: 0;
+    }
+    
+    .arrow-breadcrumb-badge {
+        width: 1.1rem;
+        height: 1.1rem;
+        font-size: 0.58rem;
+    }
+}

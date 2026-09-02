@@ -1,0 +1,4 @@
+﻿"CID","Nama Lengkap","NIK","No Telepon (WA)","Email","Alamat Lengkap","Koordinat Lat","Koordinat Lng","Nama Paket","Username PPPoE","Password PPPoE","Tipe Billing (prepaid/postpaid)","Skema PPN (include/exclude)","Status (active/inactive/isolated)"
+"CID-100201","Budi Santoso","3275010190010001","081234567890","budi.santoso@gmail.com","Jl. Ahmad Yani No. 12 RT 01/02 Cilegon","-6.012345","106.012345","Home Basic 20M","32750101-BUDI","netpro123","postpaid","include","active"
+"CID-100202","Siti Aminah","3275010291020002","085712345678","siti.aminah@yahoo.com","Komplek Bukit Indah Blok C3 No. 8","-6.023456","106.023456","Home Premium 50M","32750102-SITI","netpro456","prepaid","include","active"
+"CID-100203","PT Maju Bersama","3275010392030003","082198765432","it@majubersama.co.id","Kawasan Industri Krakatau Kav. 15","-6.034567","106.034567","Dedicated DIA 100M","32750103-PTMAJU","netpro789","postpaid","exclude","active"

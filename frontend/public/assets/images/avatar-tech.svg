@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="techBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <linearGradient id="skinT" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="techSuit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+
+  <circle cx="100" cy="100" r="96" fill="url(#techBg)" />
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#6366f1" stroke-width="3" stroke-opacity="0.8" />
+
+  <!-- Body / Field Tech Vest -->
+  <path d="M 40 190 C 40 148 70 140 100 140 C 130 140 160 148 160 190 Z" fill="url(#techSuit)" />
+  <!-- Safety Reflective Strips -->
+  <path d="M 65 155 L 75 190 M 135 155 L 125 190" stroke="#facc15" stroke-width="6" />
+
+  <!-- Neck -->
+  <rect x="88" y="118" width="24" height="24" rx="4" fill="#fed7aa" />
+
+  <!-- Head -->
+  <ellipse cx="100" cy="88" rx="34" ry="42" fill="#fed7aa" />
+
+  <!-- Tech Safety Helmet / Cap -->
+  <path d="M 60 74 C 60 42 78 36 100 36 C 122 36 140 42 140 74 Z" fill="#f59e0b" />
+  <path d="M 52 74 Q 100 68 148 74" stroke="#d97706" stroke-width="5" fill="none" stroke-linecap="round" />
+
+  <!-- Eyes -->
+  <ellipse cx="86" cy="90" rx="3.5" ry="4" fill="#0f172a" />
+  <ellipse cx="114" cy="90" rx="3.5" ry="4" fill="#0f172a" />
+
+  <!-- Confident Smile -->
+  <path d="M 91 112 Q 100 118 109 112" stroke="#be123c" stroke-width="2.5" stroke-linecap="round" fill="none" />
+
+  <!-- Fiber Optical Tool Icon on Chest -->
+  <circle cx="100" cy="165" r="8" fill="#facc15" />
+  <path d="M 97 165 L 103 165 M 100 162 L 100 168" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round" />
+</svg>

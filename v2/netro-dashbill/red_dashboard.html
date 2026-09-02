@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedDash OS - Executive Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                            950: '#450a0a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-900/5 text-slate-800 font-sans h-screen overflow-hidden flex">
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
+    
+    <aside id="sidebar" class="bg-gradient-to-b from-brand-950 via-slate-950 to-brand-950 text-white w-76 flex-shrink-0 fixed md:static inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30 flex flex-col shadow-2xl border-r border-brand-900/30">
+        
+        <!-- Glowing Ambient Lighting Effects -->
+        <div class="absolute top-0 left-1/4 w-32 h-32 bg-brand-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-32 h-32 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Logo Header Component -->
+        <div class="h-24 flex items-center px-6 border-b border-white/5 relative z-10">
+            <div class="relative group cursor-pointer">
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-rose-600 rounded-2xl blur opacity-70 group-hover:opacity-100 transition duration-300"></div>
+                <div class="relative h-12 w-12 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-xl ring-1 ring-white/20">
+                    <i class="fas fa-network-wired text-xl animate-pulse"></i>
+                </div>
+            </div>
+            <div class="ml-4">
+                <div class="flex items-center space-x-2">
+                    <span class="text-base font-extrabold tracking-wider bg-gradient-to-r from-white via-brand-100 to-brand-300 bg-clip-text text-transparent">REDDASH</span>
+                    <span class="h-2 w-2 rounded-full bg-emerald-400 inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                </div>
+                <p class="text-[10px] text-brand-300/80 font-bold uppercase tracking-widest mt-0.5">ISP Carrier OS v4.2</p>
+            </div>
+            <button id="close-sidebar" class="md:hidden ml-auto text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Interactive Search Input -->
+        <div class="p-4 relative z-10">
+            <div class="flex items-center bg-white/[0.04] hover:bg-white/[0.08] focus-within:bg-white/[0.08] transition-all duration-200 rounded-xl px-3.5 py-3 border border-white/10 focus-within:border-brand-500/50 shadow-inner group">
+                <i class="fas fa-search text-brand-400 mr-3 text-sm group-focus-within:text-brand-300 transition"></i>
+                <input type="text" placeholder="Cari modul, menu, atau klien..." class="bg-transparent border-none outline-none text-slate-200 w-full placeholder-slate-400 text-xs font-medium">
+                <span class="bg-white/10 text-slate-300 px-2 py-0.5 rounded-lg text-[10px] font-mono border border-white/10 shadow-sm">⌘K</span>
+            </div>
+        </div>
+
+        <!-- Navigation Menu Items -->
+        <nav class="flex-1 overflow-y-auto px-4 py-2 space-y-6 relative z-10 scrollbar-thin scrollbar-thumb-brand-900/50">
+            
+            <!-- Section 1: Main Monitoring -->
+            <div>
+                <p class="px-3 text-[10px] font-bold text-brand-400/90 uppercase tracking-widest mb-3 flex items-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mr-2 shadow-[0_0_6px_rgba(239,68,68,0.8)]"></span> Main Monitoring
+                </p>
+                <div class="space-y-1.5">
+                    <!-- Active Accordion / Item -->
+                    <div class="group">
+                        <a href="#" class="flex items-center justify-between px-3.5 py-3 bg-gradient-to-r from-brand-600 to-brand-700 rounded-xl text-white font-semibold shadow-lg shadow-brand-950/60 border border-brand-500/30 transition-all duration-200">
+                            <div class="flex items-center">
+                                <div class="h-8 w-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center mr-3 text-white shadow-sm">
+                                    <i class="fas fa-chart-pie text-xs"></i>
+                                </div>
+                                <span class="text-xs font-semibold tracking-wide">Executive Dashboard</span>
+                            </div>
+                            <i class="fas fa-chevron-up text-[10px] text-brand-100"></i>
+                        </a>
+                        <!-- Submenu Links -->
+                        <div class="pl-4 pt-2 space-y-1 border-l border-brand-800/40 ml-5 mt-1.5">
+                            <a href="#" class="flex items-center px-3 py-2 bg-brand-900/40 backdrop-blur rounded-lg text-xs text-white font-semibold shadow-sm border border-brand-700/40">
+                                <i class="fas fa-dot-circle text-[6px] mr-2 text-brand-400"></i> Ringkasan Bisnis Utama
+                            </a>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-xs text-slate-400 hover:text-white hover:bg-white/5 transition group/sub">
+                                <i class="fas fa-chart-line text-[9px] mr-2 text-slate-500 group-hover/sub:text-brand-400 transition"></i> Pendapatan Berjalan
+                            </a>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-xs text-slate-400 hover:text-white hover:bg-white/5 transition group/sub">
+                                <i class="fas fa-history text-[9px] mr-2 text-slate-500 group-hover/sub:text-brand-400 transition"></i> Tagihan Jatuh Tempo
+                            </a>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-xs text-slate-400 hover:text-white hover:bg-white/5 transition group/sub">
+                                <i class="fas fa-users text-[9px] mr-2 text-slate-500 group-hover/sub:text-brand-400 transition"></i> Pelanggan Aktif / Suspend
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Operational & CRM -->
+            <div>
+                <p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-2"></span> Operational & CRM
+                </p>
+                <div class="space-y-1.5">
+                    <a href="#" class="flex items-center justify-between px-3.5 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition group">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 text-slate-400 group-hover:bg-brand-900/50 group-hover:text-brand-300 transition">
+                                <i class="fas fa-users-cog text-xs"></i>
+                            </div>
+                            <span class="text-xs font-medium">CRM & Pelanggan</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] text-slate-500 group-hover:text-slate-300"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between px-3.5 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition group">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 text-slate-400 group-hover:bg-brand-900/50 group-hover:text-brand-300 transition">
+                                <i class="fas fa-network-wired text-xs"></i>
+                            </div>
+                            <span class="text-xs font-medium">NOC & Network Ops</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] text-slate-500 group-hover:text-slate-300"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between px-3.5 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition group">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 text-slate-400 group-hover:bg-brand-900/50 group-hover:text-brand-300 transition">
+                                <i class="fas fa-headset text-xs"></i>
+                            </div>
+                            <span class="text-xs font-medium">Ticketing & CSAT</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] text-slate-500 group-hover:text-slate-300"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Section 3: Commerce & Billing -->
+            <div>
+                <p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-2"></span> Commerce & Billing
+                </p>
+                <div class="space-y-1.5">
+                    <a href="#" class="flex items-center justify-between px-3.5 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition group">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 text-slate-400 group-hover:bg-brand-900/50 group-hover:text-brand-300 transition">
+                                <i class="fas fa-credit-card text-xs"></i>
+                            </div>
+                            <span class="text-xs font-medium">Billing & Tagihan</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] text-slate-500 group-hover:text-slate-300"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between px-3.5 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition group">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center mr-3 text-slate-400 group-hover:bg-brand-900/50 group-hover:text-brand-300 transition">
+                                <i class="fas fa-calculator text-xs"></i>
+                            </div>
+                            <span class="text-xs font-medium">Kalkulator ISP Tools</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-[10px] text-slate-500 group-hover:text-slate-300"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- User Profile Footer Component -->
+        <div class="p-4 border-t border-white/5 bg-slate-950/60 backdrop-blur-md relative z-10">
+            <div class="flex items-center justify-between bg-white/[0.04] hover:bg-white/[0.08] transition p-3 rounded-2xl border border-white/5 shadow-lg">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-600 flex items-center justify-center font-bold text-white shadow-md ring-2 ring-brand-500/30">
+                            <i class="fas fa-user-shield text-xs"></i>
+                        </div>
+                        <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-emerald-500 rounded-full border-2 border-slate-950 shadow"></span>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white leading-tight">Super Administrator</h4>
+                        <p class="text-[10px] text-brand-300/80 font-mono mt-0.5">admin@reddash.net</p>
+                    </div>
+                </div>
+                <button class="text-slate-400 hover:text-rose-400 transition p-2 rounded-xl hover:bg-white/5">
+                    <i class="fas fa-sign-out-alt text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50/50">
+        <!-- Top Navigation Header -->
+        <header class="h-24 bg-white/80 backdrop-blur-xl shadow-sm flex items-center justify-between px-8 z-10 border-b border-slate-100 flex-shrink-0">
+            <div class="flex items-center space-x-4">
+                <button id="open-sidebar" class="md:hidden text-slate-600 hover:text-brand-600 focus:outline-none p-2 rounded-xl hover:bg-slate-100 transition">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <div>
+                    <h2 class="text-lg font-extrabold text-slate-900">Ringkasan Bisnis Utama</h2>
+                    <p class="text-xs text-slate-500 font-medium">Sinkronisasi data real-time, Rabu, 26 Agustus 2026</p>
+                </div>
+            </div>
+
+            <!-- Right Controls & Notification Center -->
+            <div class="flex items-center space-x-3">
+                <button class="text-slate-400 hover:text-brand-600 relative p-3 rounded-xl hover:bg-slate-100 transition">
+                    <i class="far fa-envelope text-lg"></i>
+                    <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-600 rounded-full animate-ping"></span>
+                    <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-600 rounded-full"></span>
+                </button>
+                <button class="text-slate-400 hover:text-brand-600 relative p-3 rounded-xl hover:bg-slate-100 transition">
+                    <i class="far fa-bell text-lg"></i>
+                    <span class="absolute top-2 right-2 bg-brand-600 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full shadow-md">4</span>
+                </button>
+                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                <div class="flex items-center space-x-3 pl-1">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=dc2626&color=fff&rounded=true" alt="Avatar" class="h-10 w-10 rounded-full ring-2 ring-brand-200 shadow-md">
+                    <span class="hidden sm:block text-xs font-bold text-slate-700">Admin Utama <i class="fas fa-chevron-down text-[10px] ml-1 text-slate-400"></i></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Workspace Content Area -->
+        <main class="flex-1 overflow-y-auto p-8 space-y-8">
+            <!-- Alert Banner -->
+            <div class="bg-gradient-to-r from-brand-950 via-brand-900 to-rose-950 rounded-3xl p-6 text-white shadow-2xl shadow-brand-950/20 flex flex-col md:flex-row items-center justify-between border border-brand-700/40 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-center space-x-5 mb-4 md:mb-0 relative z-10">
+                    <div class="p-3.5 bg-brand-950/80 rounded-2xl border border-brand-700/50 shadow-inner">
+                        <i class="fas fa-rocket text-brand-300 text-2xl animate-bounce"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base tracking-wide text-white">Target Pendapatan Bulan Ini Tercapai 85%</h3>
+                        <p class="text-xs text-brand-200/90 mt-1">Seluruh parameter operasional dan penagihan pelanggan menunjukkan performa lonjakan positif.</p>
+                    </div>
+                </div>
+                <button class="bg-white text-brand-950 hover:bg-brand-50 text-xs font-extrabold px-6 py-3 rounded-xl shadow-lg transition transform active:scale-95 relative z-10">
+                    Lihat Analitik Detail
+                </button>
+            </div>
+
+            <!-- Statistic Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl shadow-sm p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">Total Pendapatan</p>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1">Rp 142.8 Jt</h3>
+                        </div>
+                        <div class="h-14 w-14 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fas fa-wallet text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs font-semibold">
+                        <span class="text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-xl font-bold flex items-center"><i class="fas fa-arrow-up mr-1 text-[10px]"></i> +14.2%</span>
+                        <span class="text-slate-400 ml-2">vs bulan lalu</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl shadow-sm p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">Pelanggan Aktif</p>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1">3,842</h3>
+                        </div>
+                        <div class="h-14 w-14 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fas fa-users text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs font-semibold">
+                        <span class="text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-xl font-bold flex items-center"><i class="fas fa-arrow-up mr-1 text-[10px]"></i> +8.1%</span>
+                        <span class="text-slate-400 ml-2">pelanggan baru</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl shadow-sm p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">Tiket Gangguan</p>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1">14 Kasus</h3>
+                        </div>
+                        <div class="h-14 w-14 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fas fa-ticket-alt text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs font-semibold">
+                        <span class="text-rose-600 bg-rose-50 px-2.5 py-1 rounded-xl font-bold flex items-center"><i class="fas fa-exclamation-triangle mr-1 text-[10px]"></i> 2 Urgent</span>
+                        <span class="text-slate-400 ml-2">dalam proses</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-3xl shadow-sm p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wider">Tagihan Lunas</p>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1">92.4%</h3>
+                        </div>
+                        <div class="h-14 w-14 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs font-semibold">
+                        <span class="text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-xl font-bold flex items-center"><i class="fas fa-arrow-up mr-1 text-[10px]"></i> +3.5%</span>
+                        <span class="text-slate-400 ml-2">ketepatan bayar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Charts & Server Stats Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Analytics Chart -->
+                <div class="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-100 p-8 flex flex-col">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-base font-extrabold text-slate-900">Statistik Pendapatan</h3>
+                            <p class="text-xs text-slate-500">Performa transaksi tahun berjalan</p>
+                        </div>
+                        <select class="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-xl px-4 py-2 font-semibold focus:outline-none focus:border-brand-500">
+                            <option>Tahun 2026</option>
+                            <option>Tahun 2025</option>
+                        </select>
+                    </div>
+                    <div class="relative flex-1 min-h-[280px] w-full">
+                        <canvas id="mainDashboardChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- System & Node Widget -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900 mb-1">Status Sistem & Node</h3>
+                        <p class="text-xs text-slate-500 mb-6">Infrastruktur inti jaringan saat ini</p>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-700">Kapasitas Bandwidth POP</span>
+                                    <span class="text-brand-600 font-mono">78.4%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-brand-600 h-full rounded-full transition-all duration-500" style="width: 78.4%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-700">Kinerja Server RADIUS</span>
+                                    <span class="text-emerald-600 font-mono">99.9%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 99.9%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-700">Load CPU Gateway Utama</span>
+                                    <span class="text-amber-600 font-mono">42.1%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 42.1%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-slate-100">
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span class="font-medium">Status Otorisasi Node</span>
+                            <span class="bg-emerald-50 text-emerald-700 font-bold px-3 py-1 rounded-xl border border-emerald-200">Normal / Optimal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900">Transaksi & Aktivitas Terbaru</h3>
+                        <p class="text-xs text-slate-500">Daftar pembayaran pelanggan yang masuk hari ini</p>
+                    </div>
+                    <button class="text-xs font-bold text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2 rounded-xl transition">Lihat Semua</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-slate-50/70 text-slate-400 text-[10px] uppercase tracking-wider font-bold">
+                                <th class="px-8 py-4">ID Transaksi</th>
+                                <th class="px-8 py-4">Pelanggan</th>
+                                <th class="px-8 py-4">Paket Layanan</th>
+                                <th class="px-8 py-4">Jumlah</th>
+                                <th class="px-8 py-4">Status</th>
+                                <th class="px-8 py-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xs divide-y divide-slate-100 font-medium">
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-8 py-4 font-mono font-bold text-slate-900">#INV-9821</td>
+                                <td class="px-8 py-4 text-slate-700 flex items-center">
+                                    <div class="h-8 w-8 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-[10px] mr-3 border border-brand-100 shadow-sm">AR</div>
+                                    Ahmad Ramadhan
+                                </td>
+                                <td class="px-8 py-4 text-slate-500">Fiber Home 50 Mbps</td>
+                                <td class="px-8 py-4 font-bold text-slate-900">Rp 350.000</td>
+                                <td class="px-8 py-4">
+                                    <span class="px-3 py-1 rounded-xl text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">Lunas</span>
+                                </td>
+                                <td class="px-8 py-4 text-center">
+                                    <button class="text-slate-400 hover:text-brand-600 p-2 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-8 py-4 font-mono font-bold text-slate-900">#INV-9820</td>
+                                <td class="px-8 py-4 text-slate-700 flex items-center">
+                                    <div class="h-8 w-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-[10px] mr-3 border border-blue-100 shadow-sm">SW</div>
+                                    Siti Wulandari
+                                </td>
+                                <td class="px-8 py-4 text-slate-500">Fiber Business 100 Mbps</td>
+                                <td class="px-8 py-4 font-bold text-slate-900">Rp 850.000</td>
+                                <td class="px-8 py-4">
+                                    <span class="px-3 py-1 rounded-xl text-[10px] font-extrabold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">Pending</span>
+                                </td>
+                                <td class="px-8 py-4 text-center">
+                                    <button class="text-slate-400 hover:text-brand-600 p-2 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="px-8 py-4 font-mono font-bold text-slate-900">#INV-9819</td>
+                                <td class="px-8 py-4 text-slate-700 flex items-center">
+                                    <div class="h-8 w-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-[10px] mr-3 border border-purple-100 shadow-sm">DH</div>
+                                    Dedi Haryanto
+                                </td>
+                                <td class="px-8 py-4 text-slate-500">Fiber Home 30 Mbps</td>
+                                <td class="px-8 py-4 font-bold text-slate-900">Rp 275.000</td>
+                                <td class="px-8 py-4">
+                                    <span class="px-3 py-1 rounded-xl text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">Lunas</span>
+                                </td>
+                                <td class="px-8 py-4 text-center">
+                                    <button class="text-slate-400 hover:text-brand-600 p-2 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="pt-4 pb-6 text-center text-xs text-slate-400 font-medium">
+                &copy; 2026 RedDash OS Management System. All rights reserved.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const openBtn = document.getElementById('open-sidebar');
+        const closeBtn = document.getElementById('close-sidebar');
+        const overlay = document.getElementById('mobile-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        openBtn.addEventListener('click', toggleSidebar);
+        closeBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('mainDashboardChart').getContext('2d');
+            
+            let redGradient = ctx.createLinearGradient(0, 0, 0, 280);
+            redGradient.addColorStop(0, 'rgba(220, 38, 38, 0.35)');
+            redGradient.addColorStop(1, 'rgba(220, 38, 38, 0.0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu'],
+                    datasets: [{
+                        label: 'Pendapatan (Juta Rp)',
+                        data: [75, 82, 95, 110, 105, 125, 134, 142.8],
+                        borderColor: '#dc2626',
+                        backgroundColor: redGradient,
+                        borderWidth: 3.5,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#dc2626',
+                        pointBorderWidth: 2.5,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#450a0a',
+                            titleFont: { size: 12, family: 'Plus Jakarta Sans', weight: 'bold' },
+                            bodyFont: { size: 13, family: 'Plus Jakarta Sans', weight: 'bold' },
+                            padding: 14,
+                            cornerRadius: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    return ' Rp ' + context.parsed.y + ' Juta';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { size: 10, family: 'Plus Jakarta Sans' }, color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10, family: 'Plus Jakarta Sans' }, color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
